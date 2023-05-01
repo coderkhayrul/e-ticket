@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
         //  Station Seeder Create
         foreach (eticket_stations() as $station){
             Station::create($station);
@@ -32,8 +33,9 @@ class DatabaseSeeder extends Seeder
         }
         //  Train Bogi Seeder Create
         foreach (eticket_bogis() as $bogi){
-            $bogi = Bogi::create($bogi);
+            Bogi::create($bogi);
         }
+        //  Train Seat Seeder Create
         for ($i=1; $i<=30; $i++){
             Seat::create([
                 'name' =>  Bogi::all()->random()->name . '-' . $i,
