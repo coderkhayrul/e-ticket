@@ -8,7 +8,9 @@ use App\Models\Schedule;
 use App\Models\Seat;
 use App\Models\Station;
 use App\Models\Train;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,30 +20,50 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@mail.com',
+            'password' => Hash::make('password'),
+        ]);
 
         //  Station Seeder Create
         foreach (eticket_stations() as $station){
             Station::create($station);
         }
         //  Train Seeder Create
-        foreach (eticket_trains() as $train){
-            Train::create($train);
-        }
-        //  Train Bogi Seeder Create
-        foreach (eticket_bogis() as $bogi){
-            Bogi::create($bogi);
-        }
-        //  Train Seat Seeder Create
-        for ($i=1; $i<=30; $i++){
-            Seat::create([
-                'name' =>  Bogi::all()->random()->name . '-' . $i,
-                'bogi_id' => Bogi::all()->random()->id,
-            ]);
+        Train::insert(
+            [
+                [
+                    'name' => 'Suborno Express',
+                    'date' => '2022-01-06',
+                    'home_station_id' => 1,
+                    'start_time' => '06:00'
+                ],
+                [
+                    'name' => 'Chitra Express',
+                    'date' => '2022-01-06',
+                    'home_station_id' => 1,
+                    'start_time' => '11:00'
+                ]
+            ]
+        );
+
+        $trains = Train::all();
+        foreach ($trains as $train){
+            foreach (eticket_bogis() as $bogiItem){
+                $bogi = new Bogi();
+                $bogi->name = $bogiItem;
+                $bogi->train_id = $train->id;
+                $bogi->save();
+
+                for ($i=0; $i<=30; $i++){
+                    $seat = new Seat();
+                    $seat->name = $bogi->name . '-' . $i;
+                    $seat->bogi_id = $bogi->id;
+                    $seat->train_id = $train->id;
+                    $seat->save();
+                }
+            }
         }
         Schedule::create([
             'train_id' => 1,

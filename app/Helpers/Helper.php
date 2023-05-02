@@ -46,14 +46,22 @@ function eticket_trains(): array
 
 function eticket_bogis(): array
 {
+    return ['KA', 'KHA'];
+}
+
+function type_number_by_name(): array
+{
     return [
-        [
-            'name' => 'KA',
-            'train_id' => 1,
-        ],
-        [
-            'name' => 'KHA',
-            'train_id' => 1,
-        ],
+        0 => 'Shovon',
+        1 => 'Shovon Chair',
     ];
 }
+
+function type_number_by_table_name(): array
+{
+    return [
+        0 => 'shovon_price',
+        1 => 's_chair_price',
+    ];
+}
+

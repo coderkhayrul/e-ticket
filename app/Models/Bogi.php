@@ -13,4 +13,9 @@ class Bogi extends Model
         'name',
         'train_id',
     ];
+
+    // Bogi HasMany Seats
+    public function seats(){
+        return $this->hasMany(Seat::class, 'bogi_id', 'id');
+    }
 }
