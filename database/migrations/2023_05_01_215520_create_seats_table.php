@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('bogi_id');
             $table->unsignedBigInteger('type')->default(0)->comment('0= Shovon, 1= Shovon Chair');
+            $table->unsignedBigInteger('booked')->default(0)->comment('0= open, 1= booked');
             $table->string('name');
             $table->timestamps();
 

@@ -15,15 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('train_id');
             $table->unsignedBigInteger('station_id');
-            $table->dateTime('time');
-            $table->float('ac_b_price');
-            $table->float('ac_s_price');
-            $table->float('snigdha_price');
-            $table->float('f_berth_price');
-            $table->float('f_seat_price');
-            $table->float('f_chair_price');
-            $table->float('s_chair_price');
-            $table->float('shovon_price');
+            $table->time('time');
+            $table->float('ac_b_price')->nullable();
+            $table->float('ac_s_price')->nullable();
+            $table->float('snigdha_price')->nullable();
+            $table->float('f_berth_price')->nullable();
+            $table->float('f_seat_price')->nullable();
+            $table->float('f_chair_price')->nullable();
+            $table->float('s_chair_price')->nullable();
+            $table->float('shovon_price')->nullable();
             $table->timestamps();
 
             $table->foreign('train_id')->references('id')->on('trains');

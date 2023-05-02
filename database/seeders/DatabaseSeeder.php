@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Bogi;
+use App\Models\Schedule;
 use App\Models\Seat;
 use App\Models\Station;
 use App\Models\Train;
@@ -42,5 +43,13 @@ class DatabaseSeeder extends Seeder
                 'bogi_id' => Bogi::all()->random()->id,
             ]);
         }
+        Schedule::create([
+            'train_id' => 1,
+            'station_id' => 2,
+            'time' => '07:00',
+            's_chair_price' => 15,
+            'f_chair_price' => 20,
+            'shovon_price' => 10,
+        ]);
     }
 }
